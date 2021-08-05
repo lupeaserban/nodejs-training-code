@@ -1,3 +1,5 @@
+// WORKSHOP https://github.com/stevekane/promise-it-wont-hurt
+
 //1
 
 setTimeout(() => console.log("TIMED OUT!"), 300);
