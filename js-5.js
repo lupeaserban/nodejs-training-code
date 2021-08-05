@@ -1,3 +1,5 @@
+// WORKSHOP https://github.com/sporto/planetproto
+
 ///010
 
 // -> Create an object called 'robot' using an object literal
