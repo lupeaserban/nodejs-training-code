@@ -37,8 +37,8 @@ router.post('/users/logout', auth, async (req, res) => {
     }
 })
 
-router.post('/users/logoutAll', auth, async (req,res) => {
-    try{
+router.post('/users/logoutAll', auth, async (req, res) => {
+    try {
         req.user.tokens = [];
         await req.user.save();
         res.send();
@@ -61,7 +61,6 @@ router.get('/users', auth, async (req, res) => {
     //     res.status(500).send(e.message);
     // });
 });
-
 
 
 router.patch('/users/me', auth, async (req, res) => {
@@ -109,7 +108,6 @@ router.delete('/users/me', auth, async (req, res) => {
         res.status(500).send(e.message);
     }
 })
-
 
 module.exports = router;
 

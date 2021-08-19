@@ -33,8 +33,8 @@ app.listen(port, () => {
     console.log("Server is up on " + port);
 });
 
-const Task = require ('./models/task');
-const User = require ('./models/user');
+const Task = require('./models/task');
+const User = require('./models/user');
 
 // const main = async () => {
 //     // const task = await Task.findById('611e153c667eea2c90371135');
