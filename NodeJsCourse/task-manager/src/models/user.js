@@ -26,31 +26,39 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 7,
         validate(value) {
-            if (value.toLowerCase().includes('password')) {
-                throw new Error('Password cannot contain "password"');
+            if (!validator.isLength(value, {min: 6, max: undefined})) {
+                throw new Error("Password must be greater than 6 characters")
+            }
+
+            if (value.toLowerCase().includes("password")) {
+                throw new Error("Please choose a different password")
             }
         }
-    },
-    age: {
-        type: Number,
-        default: 0,
-        validate(value) {
-            if (value < 0) {
-                throw new Error("Age can't be negative!!");
+        },
+        age: {
+            type: Number,
+            default: 0,
+            validate(value) {
+                if (value < 0) {
+                    throw new Error("Age can't be negative!!");
+                }
             }
+        },
+        tokens: [{
+            token: {
+                type: String,
+                required: true
+            }
+        }],
+        avatar: {
+            type: Buffer
         }
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }]
-}, {
+{
     timestamps: true
-})
+}
+)
 
 userSchema.virtual('tasks', {
     ref: 'tasks',
@@ -75,7 +83,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
-    const token = jwt.sign({_id: user._id.toString()}, 'thisismynewcourse');
+    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET);
 
     user.tokens = user.tokens.concat({token});
 
@@ -90,6 +98,7 @@ userSchema.methods.toJSON = function () {
 
     delete userObject.password;
     delete userObject.tokens;
+    delete userObject.avatar;
 
     return userObject;
 
