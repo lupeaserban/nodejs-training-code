@@ -76,7 +76,7 @@
           "users"
         ],
         "summary": "Login using email and password",
-        "description": "Multiple status values can be provided with comma separated strings",
+        "description": "Login using email and password",
         "operationId": "login",
         "produces": [
           "application/json"
@@ -160,11 +160,11 @@
         "description": "Add a user avatar",
         "operationId": "addAvatar",
         "consumes": [
-          "multipart/form-data"
+            "multipart/form-data"
         ],
         "parameters": [
           {
-            "name": "file",
+            "name": "upload",
             "in": "formData",
             "description": "Upload avatar picture",
             "required": true,
